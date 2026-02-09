@@ -2,7 +2,7 @@ Hola, este es el proyecto de página web para el club de robótica, iniciado por
 
 Este proyecto se compondrá por varias divisiones:
 FrontEnd: página web, diseño, transiciones, animaciones.
-FrontEnd: conexiónes, lógica.
+BackEnd: conexiónes, lógica.
 Base de datos: alojamiento para datos de todo tipo.
 
 Proyecto ideado y documentado por estudiantes de Big Data y Desarrollo de Software, revisado por los doctores guías del club de Robótica.
