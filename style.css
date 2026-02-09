@@ -1,0 +1,109 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body {
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.navbar {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 2px solid #333;
+}
+
+.navbar nav {
+    margin-left: 20px;
+}
+
+.navbar a {
+    margin-right: 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.main-container {
+    display: flex;
+    flex: 1;
+}
+
+.sidebar-left {
+    width: 200px;
+    background: #e0e0e0;
+    border-right: 2px solid #333;
+    padding: 20px;
+}
+
+.menu-item {
+    margin-bottom: 15px;
+}
+
+.content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.robotica-section {
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.video-placeholder {
+    width: 100%;
+    height: 250px;
+    border: 2px solid #333;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin: 20px 0;
+}
+
+.text-lines .line {
+    height: 10px;
+    background: #ccc;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.sidebar-right {
+    width: 250px;
+    padding: 20px;
+    border-left: 2px solid #333;
+}
+
+.calendar-box, .projects-box {
+    border: 2px solid #333;
+    padding: 10px;
+    margin-bottom: 20px;
+    background: #fff;
+}
+
+.grid-calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 20px);
+    gap: 2px;
+    background: #333;
+    margin-top: 10px;
+}
+
+.dropdown {
+    margin-top: 10px;
+    padding: 5px;
+    border: 1px solid #666;
+    text-align: center;
+}
