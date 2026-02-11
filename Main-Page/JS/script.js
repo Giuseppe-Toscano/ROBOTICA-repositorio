@@ -113,6 +113,24 @@ function configurarEventosInteraccion() {
         '<span style="color:white;">Reproduciendo video... (Simulación)</span>';
     });
   }
+
+  // 4. Lógica de Modo Oscuro
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  if (darkModeToggle) {
+    // Cargar preferencia al inicio
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+      } else {
+        localStorage.setItem('theme', 'light');
+      }
+    });
+  }
 }
 
 function cargarContenido(claveDelContenido) {
