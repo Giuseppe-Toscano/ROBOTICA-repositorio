@@ -13,6 +13,13 @@ class DotGrid {
     this.container.appendChild(this.canvas);
     this.ctx = this.canvas.getContext('2d');
 
+    // Obtener el color dinámicamente de una variable CSS
+    const tempElement = document.createElement('div');
+    tempElement.style.setProperty('--temp-color', 'var(--azul-oscuro)'); // Usar una variable temporal
+    document.body.appendChild(tempElement);
+    const computedColor = getComputedStyle(tempElement).getPropertyValue('--temp-color').trim();
+    document.body.removeChild(tempElement);
+
     this.dots = [];
     this.mouse = { x: -1000, y: -1000 };
 
@@ -20,7 +27,7 @@ class DotGrid {
     this.config = {
       dotSize: 3,
       gap: 25,
-      color: '#1b3b59', // Azul oscuro
+      color: computedColor || '#1b3b59', // Usa el color CSS, fallback a azul oscuro
       proximity: 120,   // Radio de detección
       force: 40,        // Fuerza de levantamiento
       returnSpeed: 0.1  // Velocidad de retorno
