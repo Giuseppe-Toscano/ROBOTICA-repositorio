@@ -1,58 +1,91 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RoboHub - Club de Robótica</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="imagenes/robotica-imagen.png">
-    <!--falta la imagen xD, del logo, hay que ponerla circular-->
+    <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-    <header class="navbar">
-        <div class="logo">☰</div>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">Eventos</a>
-            <a href="#">Proyectos</a>
-            <a href="#">Curso</a>
-        </nav>
-    </header>
-    <div class="main-container">
-        <aside class="sidebar-left">
-            <div class="menu-item">Misión</div>
-            <div class="menu-item">Visión</div>
-            <hr>
-            <div class="menu-item">Contacto</div>
-            <div class="menu-item">About Us</div>
-        </aside>
-        <main class="content">
-            <section class="robotica-section">
-                <h1>Robótica :></h1>
-                <div class="video-placeholder">
-                    <span class="smiley">:V</span>
-                </div>
-                <div class="text-lines">
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                </div>
-            </section>
-        </main>
-        <aside class="sidebar-right">
-            <div class="calendar-box">
-                <h3>Calendario</h3>
-                <p>FEBRERO</p>
-                <div class="grid-calendar"></div>
-            </div>
-            <div class="projects-box">
-                <h3>Proyectos</h3>
-                <div class="dropdown">Despliegue ▾</div>
-            </div>
-        </aside>
+<header class="navbar">
+    <div class="logo" id="botonMenuHamburguesa" title="Abrir Menú Lateral" role="button" aria-controls="sidebarIzquierdo" aria-expanded="false">
+        ☰
     </div>
-</body>
+    <nav id="navegacionPrincipal">
+        <a href="#">Home</a>
+        <a href="#">Eventos</a>
+        <a href="#">Proyectos</a>
+        <a href="#">Curso</a>
+    </nav>
+</header>
 
+<div class="main-container">
+
+    <aside class="sidebar-left" id="sidebarIzquierdo">
+        <button class="menu-item" data-content-key="mision">
+            Misión
+        </button>
+        <button class="menu-item" data-content-key="vision">
+            Visión
+        </button>
+        <hr />
+        <button class="menu-item" data-content-key="contacto">
+            Contacto
+        </button>
+        <button class="menu-item" data-content-key="about">
+            About Us
+        </button>
+    </aside>
+
+    <main class="content" id="contenedorPrincipal">
+
+        <div id="dot-grid-container"></div>
+
+        <section class="robotica-section">
+            <h1 id="tituloSeccion">Robótica :></h1>
+
+            <div class="video-placeholder" id="reproductorVideo">
+                <span class="smiley">▶ (Click para Demo)</span>
+            </div>
+
+            <div class="text-lines" id="textoDescripcion">
+                <p>
+                    Bienvenido al hub central. Haz clic en el menú (☰) para ver
+                    opciones.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <aside class="sidebar-right">
+        <div class="calendar-box">
+            <h3>Calendario</h3>
+            <p id="nombreMesActual">MES AÑO</p>
+
+            <div class="calendar-weekdays">
+                <div>D</div><div>L</div><div>M</div><div>M</div><div>J</div><div>V</div><div>S</div>
+            </div>
+
+            <div class="grid-calendar" id="cuadriculaCalendario"></div>
+        </div>
+
+        <div class="projects-box">
+            <h3>Proyectos</h3>
+            <button class="dropdown-btn" id="botonDespliegueProyectos" aria-haspopup="true" aria-expanded="false" aria-controls="listaProyectos">
+                Despliegue ▾
+            </button>
+            <ul id="listaProyectos" class="hidden-list">
+                <li data-content-key="proyectoBrazo">Brazo Robótico v1</li>
+                <li data-content-key="proyectoSumo">Sumo Bot</li>
+                <li data-content-key="proyectoDron">Dron Autónomo</li>
+            </ul>
+        </div>
+    </aside>
+</div>
+
+
+<script async defer src="https://apis.google.com/js/api.js" onload="handleClientLoad()"></script>
+<script src="script.js"></script>
+<script src="dotgrid.js"></script>
+</body>
 </html>
