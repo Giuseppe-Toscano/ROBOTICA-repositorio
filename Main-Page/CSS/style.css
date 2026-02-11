@@ -9,6 +9,29 @@
     --fondo-general: #f9f9f9;
 }
 
+body.dark-mode {
+    --azul-oscuro: #5e84a2;
+    --gris-claro-sidebar: #2c2c2c;
+    --azul-claro-sidebar: #3a3a3a;
+    --blanco: #1a1a1a;
+    --texto-negro: #e0e0e0;
+    --borde-suave: #555555;
+    --fondo-general: #121212;
+}
+
+/* Ajustes específicos para texto y títulos en modo oscuro */
+body.dark-mode h1,
+body.dark-mode h3,
+body.dark-mode p,
+body.dark-mode .calendar-cell {
+    color: var(--texto-negro);
+}
+
+body.dark-mode .logo {
+    color: var(--texto-negro);
+}
+
+
 /* === RESET Y BASE === */
 * {
     box-sizing: border-box;
@@ -54,6 +77,16 @@ body {
     color: var(--texto-negro);
     font-weight: 600;
     font-size: 0.95rem;
+}
+
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: auto; /* Empuja el botón a la derecha */
+    color: var(--texto-negro); /* Color inicial, se ajustará con el modo oscuro */
+    transition: color 0.3s ease;
 }
 
 /* === LAYOUT PRINCIPAL === */
@@ -208,6 +241,10 @@ body {
     border-radius: 4px;
 }
 
+body.dark-mode .calendar-weekdays {
+    opacity: 1; /* Quitar opacidad en modo oscuro */
+}
+
 .calendar-weekdays {
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr));
@@ -257,17 +294,31 @@ body {
     opacity: 1;
 }
 
+body.dark-mode .hidden-list {
+    background: var(--blanco);
+    border: 1px solid var(--borde-suave);
+}
+
 .hidden-list li {
     padding: 8px 12px;
     border-bottom: 1px solid #eee;
     font-size: 0.9rem;
-    color: #555;
+    color: var(--texto-negro);
     cursor: pointer;
 }
+
+body.dark-mode .hidden-list li {
+    border-bottom: 1px solid var(--borde-suave);
+}
+
 
 .hidden-list li:hover {
     background-color: var(--azul-claro-sidebar);
     color: var(--azul-oscuro);
+}
+
+body.dark-mode .calendar-cell {
+    border: 1px solid var(--borde-suave); /* Ajustar borde en modo oscuro */
 }
 
 /* === ESTILOS DEL CALENDARIO === */
@@ -296,8 +347,21 @@ body {
     cursor: help; /* Indica que hay más información */
 }
 
+body.dark-mode .calendar-cell.has-event {
+    background-color: #3b5a41; /* Verde oscuro para modo oscuro */
+    border-color: #6c757d;
+}
+
 .calendar-cell.has-event:hover {
     background-color: #c3e6cb;
+}
+
+body.dark-mode .calendar-cell.has-event:hover {
+    background-color: #496d51; /* Verde más oscuro para hover en dark mode */
+}
+
+body.dark-mode .dark-mode-toggle {
+    color: var(--texto-negro); /* Asegurarse que el icono del toggle cambie de color */
 }
 
 /* === RESPONSIVE === */
