@@ -1,23 +1,47 @@
+/* === VARIABLES DE COLOR === */
+:root {
+    --azul-oscuro: #1b3b59;
+    --gris-claro-sidebar: #f2f2f2;
+    --azul-claro-sidebar: #dbe9ee;
+    --blanco: #ffffff;
+    --texto-negro: #333333;
+    --borde-suave: #cccccc;
+    --fondo-general: #f9f9f9;
+}
+
+/* === RESET Y BASE === */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: #f0f0f0;
+    background-color: var(--fondo-general);
     display: flex;
     flex-direction: column;
     height: 100vh;
+    overflow: hidden;
 }
 
+/* === NAVBAR === */
 .navbar {
-    background: #fff;
+    background: var(--blanco);
     display: flex;
     align-items: center;
     padding: 10px 20px;
-    border-bottom: 2px solid #333;
+    border-bottom: 1px solid var(--borde-suave);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    height: 60px;
+    z-index: 10; /* Asegura que el menú esté encima de todo */
+}
+
+.logo {
+    font-size: 1.5rem;
+    cursor: pointer;
+    user-select: none;
+    padding: 5px;
 }
 
 .navbar nav {
@@ -27,83 +51,271 @@ body {
 .navbar a {
     margin-right: 20px;
     text-decoration: none;
-    color: #333;
-    font-weight: bold;
+    color: var(--texto-negro);
+    font-weight: 600;
+    font-size: 0.95rem;
 }
 
+/* === LAYOUT PRINCIPAL === */
 .main-container {
     display: flex;
     flex: 1;
+    position: relative;
+    overflow: hidden;
 }
 
+/* === SIDEBAR IZQUIERDO (ANIMADO) === */
 .sidebar-left {
-    width: 200px;
-    background: #e0e0e0;
-    border-right: 2px solid #333;
-    padding: 20px;
+    width: 0;
+    background: var(--gris-claro-sidebar);
+    border-right: 0px solid transparent;
+    padding: 0;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    z-index: 5;
+}
+
+.sidebar-left.activo {
+    width: 220px;
+    padding: 20px 0;
+    border-right: 1px solid var(--borde-suave);
 }
 
 .menu-item {
-    margin-bottom: 15px;
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 2px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--texto-negro);
+    transition: all 0.2s ease;
+    border-left: 4px solid transparent;
+    opacity: 0;
 }
 
+.sidebar-left.activo .menu-item {
+    opacity: 1;
+    transition-delay: 0.1s;
+}
+
+.menu-item:hover {
+    background-color: var(--azul-oscuro);
+    color: var(--blanco);
+    border-left: 4px solid #0d2538;
+}
+
+/* === CONTENIDO CENTRAL (AQUÍ ESTABA EL PROBLEMA) === */
 .content {
     flex: 1;
     padding: 40px;
     display: flex;
     justify-content: center;
+
+    /* CRUCIAL: Transparente para ver los puntos detrás */
+    background-color: transparent;
+
+    position: relative; /* Contexto para el grid absoluto */
+    overflow: hidden;   /* Corta los puntos que se salgan */
+    z-index: 1;
 }
 
+/* === FONDO DE PUNTOS (DOT GRID) === */
+#dot-grid-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Detrás del texto */
+    pointer-events: auto; /* Detecta el mouse */
+}
+
+/* === TARJETA DE TEXTO (GLASSMORPHISM) === */
 .robotica-section {
     text-align: center;
     width: 100%;
-    max-width: 500px;
+    max-width: 700px;
+
+    /* Efecto Vidrio */
+    background-color: transparent;
+    backdrop-filter: blur(8px);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+
+    position: relative;
+    z-index: 2; /* Encima de los puntos */
+    margin-bottom: 20px;
+    height: fit-content; /* Se ajusta al contenido */
 }
 
 .video-placeholder {
     width: 100%;
-    height: 250px;
-    border: 2px solid #333;
-    background: #fff;
+    height: 300px;
+    background: #000;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
     margin: 20px 0;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
 }
 
-.text-lines .line {
-    height: 10px;
-    background: #ccc;
-    margin-bottom: 10px;
-    border-radius: 5px;
+.video-placeholder::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(45deg, #2c3e50, #4ca1af);
+    opacity: 0.6;
 }
 
+.smiley {
+    position: relative;
+    z-index: 1;
+    color: white;
+    font-size: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 1px solid white;
+}
+
+/* === SIDEBAR DERECHO === */
 .sidebar-right {
-    width: 250px;
+    width: 280px;
     padding: 20px;
-    border-left: 2px solid #333;
+    background-color: var(--azul-claro-sidebar);
+    border-left: 1px solid var(--borde-suave);
+    overflow-y: auto;
+    z-index: 5;
 }
 
 .calendar-box, .projects-box {
-    border: 2px solid #333;
-    padding: 10px;
+    border: 1px solid var(--borde-suave);
+    padding: 15px;
     margin-bottom: 20px;
-    background: #fff;
+    background: var(--blanco);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border-radius: 4px;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 4px;
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--texto-negro);
+    opacity: 0.7;
 }
 
 .grid-calendar {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(5, 20px);
-    gap: 2px;
-    background: #333;
-    margin-top: 10px;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 4px;
+    margin-top: 5px;
 }
 
-.dropdown {
+.dropdown-btn {
+    width: 100%;
+    padding: 10px;
     margin-top: 10px;
-    padding: 5px;
-    border: 1px solid #666;
+    cursor: pointer;
+    background-color: var(--azul-oscuro);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.hidden-list {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease-out, opacity 0.4s ease-out;
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.active-list {
+    max-height: 200px; /* Suficientemente grande para contener los elementos */
+    opacity: 1;
+}
+
+.hidden-list li {
+    padding: 8px 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+    color: #555;
+    cursor: pointer;
+}
+
+.hidden-list li:hover {
+    background-color: var(--azul-claro-sidebar);
+    color: var(--azul-oscuro);
+}
+
+/* === ESTILOS DEL CALENDARIO === */
+.calendar-cell {
+    background: var(--blanco);
     text-align: center;
+    padding: 6px;
+    font-size: 0.9rem;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    color: var(--texto-negro);
+    cursor: default;
+}
+
+.calendar-cell.today {
+    background: var(--azul-oscuro);
+    color: var(--blanco);
+    font-weight: bold;
+    border: 1px solid var(--azul-oscuro);
+}
+
+.calendar-cell.has-event {
+    background-color: #d4edda; /* Un color suave para indicar evento */
+    border-color: #28a745;
+    position: relative;
+    cursor: help; /* Indica que hay más información */
+}
+
+.calendar-cell.has-event:hover {
+    background-color: #c3e6cb;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+
+    .sidebar-left, .sidebar-right {
+        width: 100%;
+    }
+
+    .content {
+        overflow: visible; /* En móvil dejamos que fluya */
+    }
+
+    .navbar nav {
+        display: none;
+    }
 }
